@@ -1,7 +1,7 @@
 services:
   ratings:
     build: .
-    image: ghcr.io/watcharapol-numpaya/bookinfo-ratings:dev
+    image: ghcr.io/watcharapol-numpaya/bookinfo-ratings:uat
     ports:
       - "8080:8080"
     environment:
