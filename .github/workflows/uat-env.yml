@@ -1,8 +1,8 @@
-name: dev-env
+name: uat-env
 on:
   push:
     branches:
-      - dev
+      - master
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -21,7 +21,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/watcharapol-numpaya/bookinfo-ratings:dev
+          tags: ghcr.io/watcharapol-numpaya/bookinfo-ratings:uat
           secrets: |
             GIT_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
   deploy:
@@ -40,19 +40,14 @@ jobs:
         uses: deliverybot/helm@v1
         with:
           helm: helm3
-          release: bookinfo-dev-ratings
-          namespace: student85-bookinfo-dev
+          release: bookinfo-uat-ratings
+          namespace: student85-bookinfo-uat
           chart: k8s/helm
-          value-files: k8s/helm-values/values-bookinfo-dev-ratings.yaml
+          value-files: k8s/helm-values/values-bookinfo-uat-ratings.yaml
           values: |
             {
               "extraEnv": {
                 "COMMIT_SHA": "${{ github.sha }}"
               }
             }
-    acceptance-test:
-      needs: deploy
-      runs-on: ubuntu-20.04
-      steps:
-        - name: Acceptance test 
-          run: curl http://bookinfo.dev.opsta.net/student85/ratings/health | grep "Ratings is working"
+ 
