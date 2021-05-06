@@ -51,7 +51,7 @@ jobs:
               }
             }
   acceptance-test:
-    needs: deloy
+    needs: deploy
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout web  health status
