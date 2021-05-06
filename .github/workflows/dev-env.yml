@@ -50,4 +50,10 @@ jobs:
                 "COMMIT_SHA": "${{ github.sha }}"
               }
             }
+  acceptance-test:
+    needs: deloy
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout web  health status
+        run: curl http://bookinfo.dev.opsta.net/student85/ratings/health | grep "Ratings is working"
  
