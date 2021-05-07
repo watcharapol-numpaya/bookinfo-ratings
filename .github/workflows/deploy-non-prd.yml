@@ -33,7 +33,7 @@ jobs:
           cluster_name: k8s
           location: asia-southeast1-a
           credentials: ${{ secrets.GKE_CREDENTIALS }}
-- name: deploy
+      - name: deploy
         uses: deliverybot/helm@v1
         with:
           helm: helm3
